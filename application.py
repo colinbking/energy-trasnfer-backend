@@ -24,7 +24,7 @@ tasks = [
 CORS(main)
 
 
-@app.route('/', methods=['GET'])
+@main.route('/', methods=['GET'])
 def index():
     mapping, l = readfile()
     answer = mainstuff(mapping, l)
