@@ -1,7 +1,11 @@
 from flask import Flask, jsonify
-from doIt import doIt
+from process import mainstuff
+from flask_cors import CORS
+from energyChallenge import readfile
+import json
 
-app = Flask(__name__)
+
+main = Flask(__name__)
 
 tasks = [
     {
@@ -17,11 +21,14 @@ tasks = [
         'done': False
     }
 ]
+CORS(main)
+
 
 @app.route('/', methods=['GET'])
 def index():
-    doIt()
-    return jsonify({'tasks': tasks})
+    mapping, l = readfile()
+    answer = mainstuff(mapping, l)
+    return jsonify(answer)
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    main.run(debug=True)
