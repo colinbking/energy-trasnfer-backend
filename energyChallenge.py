@@ -12,7 +12,22 @@ def readRow(row):
     mapping[custID] = loadTime
     start = row[6]
     end = row[7]
-    print(start, end)
+    print(start)
+    print(reorderDate(start))
+
+def reorderDate(date):
+    newDate = "20"
+    curr = 0
+    start = 0
+    while(curr < len(date)):
+        
+        curr = curr + 1
+        if(date[len(date)-curr] == '/'):
+            newDate = newDate + date[len(date)-curr+1:len(date)-start]
+            start = curr
+            newDate = newDate + '-'
+    return newDate
+
 
 with open('energyTransfer.csv', newline='') as csvfile:
     reader = csv.reader(csvfile, delimiter=',', quotechar="|")
